@@ -7,6 +7,7 @@ package objects;
 
 import java.io.File;
 import java.util.HashMap;
+import utils.FileUtility;
 
 /**
  * This class represents a story ; with characters, chapters, backgrounds and more.
@@ -54,7 +55,7 @@ public class Story {
     private void loadChapters(){
         File chaptersFolder = new File(directory, "chapters");
         
-        for(File chapter : chaptersFolder.listFiles(f -> f.isDirectory()))
+        for(File chapter : chaptersFolder.listFiles(FileUtility.directories))
             chapters.put(chapter.getName(), new Chapter(chapter));
     }
 
