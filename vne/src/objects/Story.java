@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class Story {
     
-    private final File folder;
+    private final File directory;
     
     private final HashMap<String, Chapter> chapters
             = new HashMap<>();
@@ -22,18 +22,47 @@ public class Story {
     private final HashMap<String, Actor> actors
             = new HashMap<>();
     
-    public Story(File folder){
-        this.folder = folder;
-    }
+    private Progress state = null;
     
-    public void load(){
-        
+    private Settings settings;
+    
+    public Story(File folder){
+        this.directory = folder;
     }
     
     /**
-     * The current state of the game : what is displayed, etc.
+     * Loads this story at the last save. Any unsaved progress will be lost.
      */
-    private class State {
+    public void load(){
+        reload();
+    }
+    
+    /**
+     * Loads the contents of the story without modifying the story's progress.
+     */
+    public void reload(){
+        loadSettings();
+        loadChapters();
+        loadActors();
+    }
+    
+    /**
+     * Loads all chapters into memory.
+     * <p>The chapters will be located in the 'chapters' directory inside of the
+     * story's root. Files that are not directories are ignored.
+     */
+    private void loadChapters(){
+        File chaptersFolder = new File(directory, "chapters");
         
+        for(File chapter : chaptersFolder.listFiles(f -> f.isDirectory()))
+            chapters.put(chapter.getName(), new Chapter(chapter));
+    }
+
+    private void loadActors() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void loadSettings() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

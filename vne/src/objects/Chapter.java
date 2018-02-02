@@ -5,6 +5,7 @@
  */
 package objects;
 
+import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -13,7 +14,18 @@ import java.util.HashMap;
  */
 class Chapter {
     
+    private final File directory;
+    
     private final HashMap<String, Stage> stages
             = new HashMap<>();
+
+    /**
+     * Creates this chapter and searches for stages but doesn't load them.
+     * @param chapter the directory where this chapter is.
+     */
+    public Chapter(File chapter) {
+        directory = chapter;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

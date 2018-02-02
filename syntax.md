@@ -2,6 +2,7 @@
 
 		Story
 			settings.txt
+			save.txt
 			actors/
 				actor1/
 					data.txt
@@ -16,8 +17,8 @@
 					stage1.txt
 					stage2.txt
 				chapter2/
-				endings/
-					ending1.txt
+			endings/
+				ending1.txt
 			sounds/
 				musics/
 				effects/
