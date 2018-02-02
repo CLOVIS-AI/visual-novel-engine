@@ -13,7 +13,7 @@ import utils.FileUtility;
  * This class represents a story ; with characters, chapters, backgrounds and more.
  * @author CLOVIS
  */
-public class Story {
+public class Story implements Save, Load {
     
     private final File directory;
     
@@ -34,6 +34,7 @@ public class Story {
     /**
      * Loads this story at the last save. Any unsaved progress will be lost.
      */
+    @Override
     public void load(){
         reload();
     }
@@ -61,10 +62,19 @@ public class Story {
     }
 
     private void loadActors() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File actorsFolder = new File(directory, "actors");
+        FileUtility.assertDirectory(actorsFolder);
+        
+        for(File actor : actorsFolder.listFiles(FileUtility.directories))
+            actors.put(actor.getName(), new Actor(actor));
     }
 
     private void loadSettings() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

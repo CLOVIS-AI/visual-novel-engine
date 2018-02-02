@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author CLOVIS
  */
-class Chapter {
+class Chapter implements Save {
     
     private final File directory;
     
@@ -25,6 +25,11 @@ class Chapter {
      */
     public Chapter(File chapter) {
         directory = chapter;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

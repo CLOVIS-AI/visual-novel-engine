@@ -5,16 +5,27 @@
  */
 package objects;
 
+import java.io.File;
+
 /**
  *
  * @author CLOVIS
  */
-class Actor {
+class Actor implements Save {
     
-    public final String name;
-    
-    public Actor(String name){
-        this.name = name;
+    private final String name;
+
+    /**
+     * Loads an actor from a data file.
+     * @param file where to load the actor from.
+     */
+    Actor(File file) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -9,7 +9,7 @@ package objects;
  * This class represents a stage.
  * @author CLOVIS
  */
-public class Stage {
+public class Stage implements Save, Load {
     
     private final String path;
     private String name;
@@ -24,17 +24,23 @@ public class Stage {
     }
     
     public void next(){
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
     public void load(){
-        
         isLoaded = true;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public void unload(){
-        
         isLoaded = false;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

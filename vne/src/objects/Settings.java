@@ -9,6 +9,16 @@ package objects;
  * The settings of a particular story.
  * @author CLOVIS
  */
-class Settings {
+class Settings implements Load, Save {
+
+    @Override
+    public void load() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void save() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
