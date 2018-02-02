@@ -54,6 +54,7 @@ public class Story {
      */
     private void loadChapters(){
         File chaptersFolder = new File(directory, "chapters");
+        FileUtility.assertDirectory(chaptersFolder);
         
         for(File chapter : chaptersFolder.listFiles(FileUtility.directories))
             chapters.put(chapter.getName(), new Chapter(chapter));
