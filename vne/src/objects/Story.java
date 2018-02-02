@@ -49,7 +49,7 @@ public class Story implements Save, Load {
     }
     
     /**
-     * Loads all chapters into memory.
+     * Loads all chapters.
      * <p>The chapters will be located in the 'chapters' directory inside of the
      * story's root. Files that are not directories are ignored.
      */
@@ -61,6 +61,11 @@ public class Story implements Save, Load {
             chapters.put(chapter.getName(), new Chapter(chapter));
     }
 
+    /**
+     * Loads all actors.
+     * <p>The actors are expected to be located in the 'actors' directory inside
+     * of the story's root. Files that are not directories are ignored.
+     */
     private void loadActors() {
         File actorsFolder = new File(directory, "actors");
         FileUtility.assertDirectory(actorsFolder);
@@ -69,8 +74,16 @@ public class Story implements Save, Load {
             actors.put(actor.getName(), new Actor(actor));
     }
 
+    /**
+     * Loads the settings of this story.
+     * <p>The settings are expected to be located in the 'settings.txt' file
+     * inside of the story's root.
+     */
     private void loadSettings() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        File settingsFile = new File(directory, "settings.txt");
+        FileUtility.assertFile(settingsFile);
+        
+        settings = new Settings(settingsFile);
     }
 
     @Override

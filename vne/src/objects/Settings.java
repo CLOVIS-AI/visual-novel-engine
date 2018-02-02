@@ -5,14 +5,22 @@
  */
 package objects;
 
+import java.io.File;
+
 /**
  * The settings of a particular story.
  * @author CLOVIS
  */
-class Settings implements Load, Save {
+class Settings implements Save {
+    
+    private final File file;
 
-    @Override
-    public void load() {
+    /**
+     * Loads the settings from a file.
+     * @param file the file.
+     */
+    Settings(File file) {
+        this.file = file;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
