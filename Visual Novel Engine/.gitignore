@@ -1,0 +1,9 @@
+nbproject/
+!nbproject/project.xml
+!nbproject/project.properties
+
+build.xml
+manifest.mf
+
+build/
+dist/
