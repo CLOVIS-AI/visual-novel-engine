@@ -58,7 +58,7 @@
 		add first 1
 		rm first 1
 		
-		choice What should I do ?
+		choice > What should I do ?
 		choose next Enter the room
 		choose stage:STAGE_NAME Go back
 		choose chapt:CHAPT_NAME Wait a bit
@@ -75,3 +75,9 @@
 
  1. Register the command (name, parameters, action) : "Command" object
  2. Loading of the story : creating every "Line" object
+
+# Load a stage
+
+ 1. Read through the file and split by line
+ 2. Parse each line and check if they correspond to a Command ; if they do, instantiate the Argument and store it in a Line object along with the Commands' lambda
+ 3. Execute each Line's lambda with the provided arguments

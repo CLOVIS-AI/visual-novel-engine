@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts;
+package scripts.validator;
 
 /**
  *
@@ -17,6 +17,14 @@ public class SyntaxException extends RuntimeException {
      */
     public SyntaxException() {
         super();
+    }
+    
+    /**
+     * Constructs an instance of <code>SyntaxException</code>.
+     * @param msg the detail message.
+     */
+    public SyntaxException(String msg){
+        super(msg);
     }
 
     /**
