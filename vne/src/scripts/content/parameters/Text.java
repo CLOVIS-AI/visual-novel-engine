@@ -32,6 +32,11 @@ public class Text implements Parameter {
         
         this.text = text;
     }
+    
+    @Override
+    public String getAsString() {
+        return text;
+    }
 
     @Override
     public int hashCode() {
