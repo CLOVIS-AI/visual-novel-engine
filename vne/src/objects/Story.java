@@ -53,7 +53,7 @@ public class Story implements Save, Load {
      * <p>The chapters will be located in the 'chapters' directory inside of the
      * story's root. Files that are not directories are ignored.
      */
-    private void loadChapters(){
+    void loadChapters(){
         File chaptersFolder = new File(directory, "chapters");
         FileUtility.assertDirectory(chaptersFolder);
         
@@ -66,7 +66,7 @@ public class Story implements Save, Load {
      * <p>The actors are expected to be located in the 'actors' directory inside
      * of the story's root. Files that are not directories are ignored.
      */
-    private void loadActors() {
+    void loadActors() {
         File actorsFolder = new File(directory, "actors");
         FileUtility.assertDirectory(actorsFolder);
         
@@ -79,7 +79,7 @@ public class Story implements Save, Load {
      * <p>The settings are expected to be located in the 'settings.txt' file
      * inside of the story's root.
      */
-    private void loadSettings() {
+    void loadSettings() {
         File settingsFile = new File(directory, "settings.txt");
         FileUtility.assertFile(settingsFile);
         
