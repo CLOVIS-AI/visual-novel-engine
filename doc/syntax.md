@@ -1,8 +1,10 @@
 # Architecture
 
+		./vne		
+			progress.txt
+
 		Story
 			settings.txt
-			save.txt
 			actors/
 				actor1/
 					data.txt
@@ -46,29 +48,28 @@
 
 # Stage
 
-		stage-version 1
-		stage Name of the stage
+		STAGE|1|Name of the stage
 		
 		label LABEL
 		line CHARACTER_NAME My God ! What was that scream ?
 
+		screen path/to/pic
+		
 		background path/to/pic
 		
-		var first 2
+		set first 2
 		add first 1
-		rm first 1
+		rmv first 1
 		
-		choice > What should I do ?
-		choose next Enter the room
-		choose stage:STAGE_NAME Go back
-		choose chapt:CHAPT_NAME Wait a bit
-		choose end:END_NAME Jump through the window
-		choose label:THERE Something else
+		choose What should I do ?
+		choice stg:STAGE_NAME Go back
+		choice chp:CHAPT_NAME Wait a bit
+		choice end:END_NAME Jump through the window
+		choice lbl:THERE Something else
 
-		test first equals 2
-		success stage:STAGE_NAME
-		failure stage:STAGE_NAME
-
+		equals first 2
+		success-stg STAGE_NAME
+		failure-end STAGE_NAME
 
 
 # Creating new commands
