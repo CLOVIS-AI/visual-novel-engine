@@ -5,7 +5,6 @@
  */
 package scripts.validator;
 
-import java.util.function.Function;
 import scripts.content.Parameter;
 
 /**
@@ -24,7 +23,8 @@ public interface ParameterFactory {
     /**
      * Creates the parameter of a Command.
      * @param param the expected parameter.
-     * @return The corresponding Parameter object, only if 
+     * @return The corresponding Parameter object, only if it is appropriate, null
+     * otherwise.
      * @throws SyntaxException if this argument is not legal.
      */
     public Parameter apply(String param)
