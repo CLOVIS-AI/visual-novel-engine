@@ -5,6 +5,8 @@
  */
 package objects;
 
+import java.io.File;
+
 /**
  * This class represents a stage.
  * @author CLOVIS
@@ -18,6 +20,20 @@ public class Stage implements Save, Load {
     
     //private Collection<Line> lines
     
+    /**
+     * Creates a Stage object corresponding to a Stage, but does not load it yet.
+     * @param file the location of the file.
+     * @see #load() Load this stage
+     */
+    public Stage(File file){
+        this(file.getAbsolutePath());
+    }
+    
+    /**
+     * Creates a Stage object corresponding to a Stage, but does not load it yet.
+     * @param path the location of the file.
+     * @see #load() Load this stage
+     */
     public Stage(String path){
         this.path = path;
         isLoaded = false;
