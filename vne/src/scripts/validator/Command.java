@@ -100,7 +100,7 @@ public final class Command {
      * Asserts that the provided String corresponds to this command.
      * @param line the string
      */
-    private void assertCorrespondingCommand(String line){
+    void assertCorrespondingCommand(String line){
         int firstSpace = line.indexOf(' ');
         
         if(firstSpace == -1){
@@ -119,7 +119,7 @@ public final class Command {
      * @param line the text to verify
      * @return each word in the line
      */
-    private String[] assertNumberOfParameters(String line){
+    String[] assertNumberOfParameters(String line){
         
         int parameterNumber = parameters.size() + (acceptText ? 1 : 0),
             wordNumber = parameterNumber + 1; // params + command name
@@ -145,7 +145,7 @@ public final class Command {
      * @param words the words of a line, as returned by {@link #assertNumberOfParameters(java.lang.String) assertNumberOfParameters}.
      * @return The same array, without the command name.
      */
-    private String[] getParameters(String[] words){
+    String[] getParameters(String[] words){
         String[] params = new String[words.length-1];
         
         for(int i = 1; i < words.length; i++)
@@ -160,7 +160,7 @@ public final class Command {
      * @return A lit of all the parameters.
      * @throws SyntaxException if any factory fails.
      */
-    private List<Parameter> applyFactories(String[] params){
+    List<Parameter> applyFactories(String[] params){
         List<Parameter> parameters = new ArrayList<>(params.length);
         
         for(int i = 0; i < params.length; i++){
