@@ -33,24 +33,20 @@ public class CommandTest {
     /** Parameters : Number, Text */
     public static final List<ParameterFactory> params01 = Arrays.asList(
             Number.factory,
-            Text.factory
+            Text.shortFactory
         );
     
     /** Parameters : Number, ChapterLink, Text */
     public static final List<ParameterFactory> params02 = Arrays.asList(
             Number.factory,
-            ChapterLink.factory,
-            Text.factory
+            Text.shortFactory,
+            Text.longFactory
         );
     
     /** A prewritten command for test purposes : 'test'. Parameters : Number, Text */
-    public static final Command command01f = new Command("test", (pr, pm) -> System.out.println("Test"), params01, false);
+    public static final Command command01f = new Command("test", (pr, pm) -> System.out.println("Test"), params01);
     /** A prewritten command for test purposes : 'test'. Parameters : Number, Text + Text */
-    public static final Command command01t = new Command("test", (pr, pm) -> System.out.println("Test"), params01, true);
-    /** A prewritten command for test purposes : 'test'. Parameters : Number, ChapterLink, Text */
-    public static final Command command02f = new Command("test", (pr, pm) -> System.out.println("Test"), params02, false);
-    /** A prewritten command for test purposes : 'test'. Parameters : Number, ChapterLink, Text + Text */
-    public static final Command command02t = new Command("test", (pr, pm) -> System.out.println("Test"), params02, true);
+    public static final Command command01t = new Command("test", (pr, pm) -> System.out.println("Test"), params02);
     
     public CommandTest() {
     }
@@ -78,7 +74,7 @@ public class CommandTest {
     public void testApply() {
         System.out.println("apply");
         BiConsumer<Progress, List<Parameter>> action = (p, l) -> System.out.println("Command action");
-        Command cmd = new Command("test", action, Text.factory, false);
+        Command cmd = new Command("test", action, Text.shortFactory);
         Line line = new Line(action, new Text("foo"));
         
         try{
@@ -136,14 +132,6 @@ public class CommandTest {
         String[] reply = command01f.assertNumberOfParameters("test 2 foo");
         assertEquals(3, reply.length);
         assertArrayEquals(new String[]{"test", "2", "foo"}, reply);
-        
-        try{
-            String[] reply2 = command01f.assertNumberOfParameters("test 2 foo 3 bar");
-            fail("The number of parameters was not the expected value, found "
-                    + Arrays.deepToString(reply2));
-        }catch(SyntaxException e){
-            assertTrue(true);
-        }
         
         // Tests for commands that do accept text as a last argument
         

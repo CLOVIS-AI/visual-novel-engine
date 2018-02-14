@@ -23,14 +23,27 @@ public class Text implements Parameter {
     
     /**
      * Creates a Text parameter.
-     * @param text
-     * @throws SyntaxException 
+     * @param text the text that was given
+     * @param allowSpaces does this parameter allow spaces?
+     * @throws SyntaxException if any syntax rule of VNScript is not verified.
      */
-    public Text(String text){
+    public Text(String text, boolean allowSpaces){
         if(text == null || text.isEmpty())
             throw new SyntaxException("A text parameter cannot be null or empty : '" + text + "'");
         
+        if(!allowSpaces && text.contains(" "))
+            throw new SyntaxException("Unexpected space character found : '" + text + "'");
+        
         this.text = text;
+    }
+    
+    /**
+     * Creates a Text parameter that does not allow space characters.
+     * @param text the text that was given
+     * @throws SyntaxException if any syntax rule of VNScript is not verified.
+     */
+    public Text(String text){
+        this(text, false);
     }
     
     @Override
@@ -66,7 +79,17 @@ public class Text implements Parameter {
     /**
      * Implementation of the {@link ParameterFactory} interface, used to create
      * a Text parameter when appropriate.
+     * <p>This implementation does not allow space characters, which means it
+     * should be used only for text that is not trailing.
      */
-    public static final ParameterFactory factory = (String param) -> new Text(param);
+    public static final ParameterFactory shortFactory = (String param) -> new Text(param, false);
+    
+    /**
+     * Implementation of the {@link ParameterFactory} interface, used to create
+     * a Text parameter when appropriate.
+     * <p>This implementation allows space characters, which means it
+     * should be used only for trailing text.
+     */
+    public static final ParameterFactory longFactory = (String param) -> new Text(param, true);
     
 }

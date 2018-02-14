@@ -12,7 +12,6 @@ import java.util.function.BiConsumer;
 import objects.Progress;
 import scripts.content.Line;
 import scripts.content.Parameter;
-import scripts.content.parameters.Text;
 
 /**
  * Represents a scripting command along with its parameters.
@@ -26,23 +25,18 @@ public final class Command {
     
     private final BiConsumer<Progress, List<Parameter>> operation;
     
-    private final boolean acceptText;
-    
     /**
      * Creates a Command object.
      * @param command the command name (eg. "choose"...).
      * @param operation what this command should do.
      * @param parameters the parameters of this command.
-     * @param acceptText <code>true</code> if this command accepts text.
      */
     public Command(String command, 
             BiConsumer<Progress, List<Parameter>> operation, 
-            ArrayList<ParameterFactory> parameters,
-            boolean acceptText){
+            ArrayList<ParameterFactory> parameters){
         this.command = command;
         this.operation = operation;
         this.parameters = parameters;
-        this.acceptText = acceptText;
     }
     
     /**
@@ -50,13 +44,11 @@ public final class Command {
      * @param command the command name (eg. "choose"...).
      * @param operation what this command should do.
      * @param parameters the parameters of this command.
-     * @param acceptText <code>true</code> if this command accepts text.
      */
     public Command(String command,
             BiConsumer<Progress, List<Parameter>> operation,
-            Collection<ParameterFactory> parameters,
-            boolean acceptText){
-        this(command, operation, new ArrayList<>(parameters), acceptText);
+            Collection<ParameterFactory> parameters){
+        this(command, operation, new ArrayList<>(parameters));
     }
     
     /**
@@ -68,9 +60,8 @@ public final class Command {
      */
     public Command(String command,
             BiConsumer<Progress, List<Parameter>> operation,
-            ParameterFactory parameter,
-            boolean acceptText){
-        this(command, operation, new ArrayList<>(1), acceptText);
+            ParameterFactory parameter){
+        this(command, operation, new ArrayList<>(1));
         parameters.add(parameter);
     }
     
@@ -103,13 +94,11 @@ public final class Command {
         int firstSpace = line.indexOf(' ');
         
         if(firstSpace == -1){
-            if(!line.equals(command)){
+            if(!line.equals(command))
                 throw new IllegalArgumentException("This command is called '" + command + "' but you provided the line : " + line);
-            }
         }else{
-            if(!line.substring(0, firstSpace).equals(command)){
+            if(!line.substring(0, firstSpace).equals(command))
                 throw new IllegalArgumentException("This command is called '" + command + "' but you provided the line : " + line);
-            }
         }
     }
     
@@ -121,16 +110,13 @@ public final class Command {
      */
     String[] assertNumberOfParameters(String line){
         
-        int parameterNumber = parameters.size() + (acceptText ? 1 : 0),
+        int parameterNumber = parameters.size(),
             wordNumber = parameterNumber + 1; // params + command name
         
         String[] words;
         
         try {
-            if(acceptText)
-                words = line.split(" ", wordNumber);
-            else
-                words = line.split(" ");
+            words = line.split(" ", wordNumber);
         }
         catch(StringIndexOutOfBoundsException e) { 
             throw new SyntaxException("Not enough parameters were provided; " + 

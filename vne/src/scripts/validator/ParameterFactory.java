@@ -15,6 +15,9 @@ import scripts.content.Parameter;
  *      <li>The parameter is legal (not null).</li>
  *      <li>The parameter is of the appropriate type.</li>
  * </ol>
+ * <p>Note that a parameter <b>can</b> contain space characters, however this is
+ * not allowed except for the trailing text. In any other case, be aware of it
+ * and remember you should throw a {@link SyntaxException } if one is present.
  * @author CLOVIS
  */
 @FunctionalInterface
