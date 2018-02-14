@@ -25,23 +25,18 @@ public final class Command {
     
     private final BiConsumer<Progress, List<Parameter>> operation;
     
-    private final boolean acceptText;
-    
     /**
      * Creates a Command object.
      * @param command the command name (eg. "choose"...).
      * @param operation what this command should do.
      * @param parameters the parameters of this command.
-     * @param acceptText <code>true</code> if this command accepts text.
      */
     public Command(String command, 
             BiConsumer<Progress, List<Parameter>> operation, 
-            ArrayList<ParameterFactory> parameters,
-            boolean acceptText){
+            ArrayList<ParameterFactory> parameters){
         this.command = command;
         this.operation = operation;
         this.parameters = parameters;
-        this.acceptText = acceptText;
     }
     
     /**
@@ -49,13 +44,11 @@ public final class Command {
      * @param command the command name (eg. "choose"...).
      * @param operation what this command should do.
      * @param parameters the parameters of this command.
-     * @param acceptText <code>true</code> if this command accepts text.
      */
     public Command(String command,
             BiConsumer<Progress, List<Parameter>> operation,
-            Collection<ParameterFactory> parameters,
-            boolean acceptText){
-        this(command, operation, new ArrayList<>(parameters), acceptText);
+            Collection<ParameterFactory> parameters){
+        this(command, operation, new ArrayList<>(parameters));
     }
     
     /**
@@ -67,9 +60,8 @@ public final class Command {
      */
     public Command(String command,
             BiConsumer<Progress, List<Parameter>> operation,
-            ParameterFactory parameter,
-            boolean acceptText){
-        this(command, operation, new ArrayList<>(1), acceptText);
+            ParameterFactory parameter){
+        this(command, operation, new ArrayList<>(1));
         parameters.add(parameter);
     }
     
@@ -82,8 +74,6 @@ public final class Command {
      * @throws IllegalArgumentException if the line does not correspond to this command.
      */
     public Line apply(String line) throws SyntaxException {
-        System.out.println("\nApplying " + line);
-        System.out.println("Expecting " + parameters.size() + " parameters");
         
         assertCorrespondingCommand(line);
         
@@ -100,17 +90,15 @@ public final class Command {
      * Asserts that the provided String corresponds to this command.
      * @param line the string
      */
-    private void assertCorrespondingCommand(String line){
+    void assertCorrespondingCommand(String line){
         int firstSpace = line.indexOf(' ');
         
         if(firstSpace == -1){
-            if(!line.equals(command)){
+            if(!line.equals(command))
                 throw new IllegalArgumentException("This command is called '" + command + "' but you provided the line : " + line);
-            }
         }else{
-            if(!line.substring(0, firstSpace).equals(command)){
+            if(!line.substring(0, firstSpace).equals(command))
                 throw new IllegalArgumentException("This command is called '" + command + "' but you provided the line : " + line);
-            }
         }
     }
     
@@ -118,10 +106,11 @@ public final class Command {
      * Asserts that the expected number of parameters was provided.
      * @param line the text to verify
      * @return each word in the line
+     * @throws SyntaxException the number of parameters was not the expected one.
      */
-    private String[] assertNumberOfParameters(String line){
+    String[] assertNumberOfParameters(String line){
         
-        int parameterNumber = parameters.size() + (acceptText ? 1 : 0),
+        int parameterNumber = parameters.size(),
             wordNumber = parameterNumber + 1; // params + command name
         
         String[] words;
@@ -130,22 +119,25 @@ public final class Command {
             words = line.split(" ", wordNumber);
         }
         catch(StringIndexOutOfBoundsException e) { 
-            throw new SyntaxException("Not enough parameters were provided, " + 
+            throw new SyntaxException("Not enough parameters were provided; " + 
                     parameterNumber + " were expected.\nLine : " + line); 
         }
         
         if(words.length != wordNumber)
-            throw new SyntaxException("Expected " + parameterNumber + " parameters, found " + (words.length-1) + ".");
+            throw new SyntaxException("Expected " + parameterNumber + " parameters, found " + (words.length-1) + ".\nLine : " + line);
         
         return words;
     }
     
     /**
      * Removes the command name from the words.
+     * <p>This method doesn't check that the accurate command name is provided,
+     * because this should have already been verified by {@link #assertCorrespondingCommand(java.lang.String) assertCorrespondingCommand}.
+     * It only deletes the first element of the array.
      * @param words the words of a line, as returned by {@link #assertNumberOfParameters(java.lang.String) assertNumberOfParameters}.
      * @return The same array, without the command name.
      */
-    private String[] getParameters(String[] words){
+    String[] getParameters(String[] words){
         String[] params = new String[words.length-1];
         
         for(int i = 1; i < words.length; i++)
@@ -160,7 +152,7 @@ public final class Command {
      * @return A lit of all the parameters.
      * @throws SyntaxException if any factory fails.
      */
-    private List<Parameter> applyFactories(String[] params){
+    List<Parameter> applyFactories(String[] params){
         List<Parameter> parameters = new ArrayList<>(params.length);
         
         for(int i = 0; i < params.length; i++){

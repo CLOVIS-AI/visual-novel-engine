@@ -90,4 +90,17 @@ public class Story implements Save, Load {
     public void save() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    /**
+     * Gets a Chapter object.
+     * @param name name of the chapter
+     * @return The Chapter object.
+     * @throws NullPointerException if no chapter with this name exist.
+     */
+    public Chapter getChapter(String name){
+        if(chapters.containsKey(name))
+            return chapters.get(name);
+        else
+            throw new NullPointerException("No chapter named '" + name + "' has been found.");
+    }
 }

@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author CLOVIS
  */
-class Chapter implements Save {
+public class Chapter implements Save {
     
     private final File directory;
     

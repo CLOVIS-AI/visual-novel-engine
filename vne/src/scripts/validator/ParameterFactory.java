@@ -5,7 +5,6 @@
  */
 package scripts.validator;
 
-import java.util.function.Function;
 import scripts.content.Parameter;
 
 /**
@@ -16,6 +15,9 @@ import scripts.content.Parameter;
  *      <li>The parameter is legal (not null).</li>
  *      <li>The parameter is of the appropriate type.</li>
  * </ol>
+ * <p>Note that a parameter <b>can</b> contain space characters, however this is
+ * not allowed except for the trailing text. In any other case, be aware of it
+ * and remember you should throw a {@link SyntaxException } if one is present.
  * @author CLOVIS
  */
 @FunctionalInterface
@@ -24,7 +26,8 @@ public interface ParameterFactory {
     /**
      * Creates the parameter of a Command.
      * @param param the expected parameter.
-     * @return The corresponding Parameter object, only if 
+     * @return The corresponding Parameter object, only if it is appropriate, null
+     * otherwise.
      * @throws SyntaxException if this argument is not legal.
      */
     public Parameter apply(String param)
