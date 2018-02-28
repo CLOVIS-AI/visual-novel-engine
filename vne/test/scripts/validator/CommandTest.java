@@ -16,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import scripts.content.Line;
 import scripts.content.Parameter;
-import scripts.content.parameters.ChapterLink;
 import scripts.content.parameters.Number;
 import scripts.content.parameters.Text;
 import static org.junit.Assert.assertArrayEquals;
@@ -90,9 +89,6 @@ public class CommandTest {
         }catch(SyntaxException s){
             assertTrue(true);
         }
-        
-        if(line.equals(cmd.apply("test foo")))
-            System.out.println("True");
         
         assertEquals(line, cmd.apply("test foo"));
         

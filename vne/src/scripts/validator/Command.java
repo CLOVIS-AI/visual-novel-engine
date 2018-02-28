@@ -56,7 +56,6 @@ public final class Command {
      * @param command the command name (eg. "choose"...).
      * @param operation what this command should do.
      * @param parameter the parameter of this command.
-     * @param acceptText <code>true</code> if this command accepts text.
      */
     public Command(String command,
             BiConsumer<Progress, List<Parameter>> operation,
