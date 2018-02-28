@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.content;
+package vnscripts.content;
 
+import vnscripts.content.Line;
+import vnscripts.content.Parameter;
 import java.util.List;
 import java.util.function.BiConsumer;
 import objects.Progress;
@@ -14,7 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import scripts.content.parameters.Text;
+import vnscripts.content.parameters.Text;
 
 /**
  *

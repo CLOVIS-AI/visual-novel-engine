@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.content.parameters;
+package vnscripts.content.parameters;
 
 import objects.Chapter;
 import objects.Story;
-import scripts.content.Parameter;
-import scripts.validator.ParameterFactory;
-import scripts.validator.SyntaxException;
+import vnscripts.content.Parameter;
+import vnscripts.validator.ParameterFactory;
+import vnscripts.validator.SyntaxException;
 
 /**
  * Represents a link to a Chapter (useful in choices for exemple).
