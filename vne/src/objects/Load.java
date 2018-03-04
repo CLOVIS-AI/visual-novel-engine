@@ -12,7 +12,7 @@ package objects;
 public interface Load {
     
     /**
-     * Saves this object.
+     * Loads this object.
      */
     public void load();
     
