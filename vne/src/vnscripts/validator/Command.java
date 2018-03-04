@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.validator;
+package vnscripts.validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.BiConsumer;
 import objects.Progress;
-import scripts.content.Line;
-import scripts.content.Parameter;
+import vnscripts.content.Line;
+import vnscripts.content.Parameter;
 
 /**
  * Represents a scripting command along with its parameters.
@@ -56,7 +56,6 @@ public final class Command {
      * @param command the command name (eg. "choose"...).
      * @param operation what this command should do.
      * @param parameter the parameter of this command.
-     * @param acceptText <code>true</code> if this command accepts text.
      */
     public Command(String command,
             BiConsumer<Progress, List<Parameter>> operation,

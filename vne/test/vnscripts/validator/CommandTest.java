@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.validator;
+package vnscripts.validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,11 +14,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import scripts.content.Line;
-import scripts.content.Parameter;
-import scripts.content.parameters.ChapterLink;
-import scripts.content.parameters.Number;
-import scripts.content.parameters.Text;
+import vnscripts.content.Line;
+import vnscripts.content.Parameter;
+import vnscripts.content.parameters.Number;
+import vnscripts.content.parameters.Text;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -90,9 +89,6 @@ public class CommandTest {
         }catch(SyntaxException s){
             assertTrue(true);
         }
-        
-        if(line.equals(cmd.apply("test foo")))
-            System.out.println("True");
         
         assertEquals(line, cmd.apply("test foo"));
         
