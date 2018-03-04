@@ -7,6 +7,7 @@ package objects;
 
 import java.io.File;
 import java.util.HashMap;
+import utils.FileUtility;
 
 /**
  *
@@ -24,8 +25,17 @@ public class Chapter implements Save {
      * @param chapter the directory where this chapter is.
      */
     public Chapter(File chapter) {
+        FileUtility.assertDirectory(chapter);
         directory = chapter;
+        loadStages();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    final void loadStages(){
+        if(!stages.isEmpty())
+            throw new IllegalStateException("This method should only called when the chapter is loaded, that is, only once.");
+        for(File stage : directory.listFiles(FileUtility.directories))
+            stages.put(stage.getName(), new Stage(stage));
     }
 
     @Override
