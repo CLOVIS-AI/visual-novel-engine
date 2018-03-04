@@ -6,6 +6,9 @@
 package objects;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import scripts.content.Line;
 
 /**
  * This class represents a stage.
@@ -18,7 +21,8 @@ public class Stage implements Save, Load {
     
     private boolean isLoaded;
     
-    //private Collection<Line> lines
+    private final List<Line> lines
+            = new ArrayList<>();
     
     /**
      * Creates a Stage object corresponding to a Stage, but does not load it yet.
