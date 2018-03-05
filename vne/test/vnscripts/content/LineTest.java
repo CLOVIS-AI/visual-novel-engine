@@ -5,8 +5,6 @@
  */
 package vnscripts.content;
 
-import vnscripts.content.Line;
-import vnscripts.content.Parameter;
 import java.util.List;
 import java.util.function.BiConsumer;
 import objects.Progress;
