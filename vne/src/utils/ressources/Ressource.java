@@ -37,4 +37,10 @@ public interface Ressource extends Load {
      */
     public Ressource child(String name);
     
+    /**
+     * Returns the name of this ressource (ie. for files, the name of the file).
+     * @return The name of the ressource.
+     */
+    public String name();
+    
 }

@@ -5,9 +5,9 @@
  */
 package objects;
 
-import java.io.File;
 import java.util.HashMap;
-import utils.FileUtility;
+import utils.ressources.Ressource;
+import utils.ressources.TextRessource;
 
 /**
  *
@@ -15,7 +15,7 @@ import utils.FileUtility;
  */
 public class Chapter implements Save {
     
-    private final File directory;
+    private final Ressource directory;
     
     private final HashMap<String, Stage> stages
             = new HashMap<>();
@@ -24,8 +24,7 @@ public class Chapter implements Save {
      * Creates this chapter and searches for stages but doesn't load them.
      * @param chapter the directory where this chapter is.
      */
-    public Chapter(File chapter) {
-        FileUtility.assertDirectory(chapter);
+    public Chapter(Ressource chapter) {
         directory = chapter;
         loadStages();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -34,8 +33,8 @@ public class Chapter implements Save {
     final void loadStages(){
         if(!stages.isEmpty())
             throw new IllegalStateException("This method should only called when the chapter is loaded, that is, only once.");
-        for(File stage : directory.listFiles(FileUtility.directories))
-            stages.put(stage.getName(), new Stage(stage));
+        for(Ressource stage : directory.children())
+            stages.put(stage.name(), new Stage((TextRessource)stage));
     }
 
     @Override

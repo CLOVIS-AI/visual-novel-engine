@@ -5,9 +5,9 @@
  */
 package objects;
 
-import java.io.File;
 import java.util.HashMap;
-import utils.FileUtility;
+import utils.ressources.Ressource;
+import utils.ressources.TextRessource;
 
 /**
  * This class represents a story ; with characters, chapters, backgrounds and more.
@@ -15,7 +15,7 @@ import utils.FileUtility;
  */
 public class Story implements Save, Load {
     
-    private final File directory;
+    private final Ressource directory;
     
     private final HashMap<String, Chapter> chapters
             = new HashMap<>();
@@ -27,8 +27,8 @@ public class Story implements Save, Load {
     
     private Settings settings;
     
-    public Story(File folder){
-        this.directory = folder;
+    public Story(Ressource story){
+        this.directory = story;
     }
     
     /**
@@ -54,11 +54,10 @@ public class Story implements Save, Load {
      * story's root. Files that are not directories are ignored.
      */
     void loadChapters(){
-        File chaptersFolder = new File(directory, "chapters");
-        FileUtility.assertDirectory(chaptersFolder);
+        Ressource chaptersFolder = directory.child("chapters");
         
-        for(File chapter : chaptersFolder.listFiles(FileUtility.directories))
-            chapters.put(chapter.getName(), new Chapter(chapter));
+        for(Ressource chapter : chaptersFolder.children())
+            chapters.put(chapter.name(), new Chapter(chapter));
     }
 
     /**
@@ -67,11 +66,10 @@ public class Story implements Save, Load {
      * of the story's root. Files that are not directories are ignored.
      */
     void loadActors() {
-        File actorsFolder = new File(directory, "actors");
-        FileUtility.assertDirectory(actorsFolder);
+        Ressource actorsFolder = directory.child("actors");
         
-        for(File actor : actorsFolder.listFiles(FileUtility.directories))
-            actors.put(actor.getName(), new Actor(actor));
+        for(Ressource actor : actorsFolder.children())
+            actors.put(actor.name(), new Actor(actor));
     }
 
     /**
@@ -80,8 +78,12 @@ public class Story implements Save, Load {
      * inside of the story's root.
      */
     void loadSettings() {
-        File settingsFile = new File(directory, "settings.txt");
-        FileUtility.assertFile(settingsFile);
+        TextRessource settingsFile;
+        try{
+            settingsFile = (TextRessource) directory.child("settings.txt");
+        }catch(ClassCastException e){
+            throw new IllegalArgumentException("The /settings.txt ressource should be a text ressource.");
+        }
         
         settings = new Settings(settingsFile);
     }

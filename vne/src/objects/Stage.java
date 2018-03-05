@@ -6,14 +6,11 @@
 package objects;
 
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import utils.ressources.TextRessource;
 import vnscripts.content.Line;
 import vnscripts.content.parameters.Text;
 import vnscripts.validator.Command;
@@ -25,7 +22,7 @@ import vnscripts.validator.SyntaxException;
  */
 public class Stage implements Save, Load {
     
-    private final String path;
+    private final TextRessource ressource;
     private final String name;
     
     private boolean isLoaded;
@@ -39,25 +36,18 @@ public class Stage implements Save, Load {
      * other data is not read, therefore the object does not contain any 
      * information on the actual content of the file yet. Use {@link #load() }
      * to load the stage.
-     * @param path Location of the Stage save file.
+     * @param ressource Location of the Stage save file.
      */
-    public Stage(String path){
-        this.path = path;
+    public Stage(TextRessource ressource){
+        this.ressource = ressource;
         isLoaded = false;
-        name = readHeader(path);
+        name = readHeader(ressource);
     }
     
-    /**
-     * Creates a Stage object.
-     * @param f 
-     */
-    public Stage(File f){
-        this(f.getAbsolutePath());
-    }
-    
-    private String readHeader(String path){
+    private static String readHeader(TextRessource ressource){
         try {
-            String header = new BufferedReader(new FileReader(path)).readLine();
+            ressource.open();
+            String header = ressource.readLine();
             String[] parts = header.split("|");
             
             if(parts.length != 3)
@@ -78,10 +68,10 @@ public class Stage implements Save, Load {
                         + "Stage in the header, found: " + parts[2]);
             
             return parts[2];
-        } catch (FileNotFoundException ex) {
-            throw new IllegalArgumentException("The file " + path + " cannot be found: (" + ex.toString() + ")");
         } catch (IOException ex) {
-            throw new IllegalArgumentException("The file " + path + " cannot be opened: (" + ex.toString() + ")");
+            throw new IllegalArgumentException("The ressource " + ressource.toString() + " cannot be opened: (" + ex.toString() + ")");
+        }finally{
+            ressource.close();
         }
     }
     
