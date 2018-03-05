@@ -8,6 +8,7 @@ package objects;
 import java.util.HashMap;
 import utils.ressources.Ressource;
 import utils.ressources.TextRessource;
+import vnscripts.validator.Commands;
 
 /**
  * This class represents a story ; with characters, chapters, backgrounds and more.
@@ -27,8 +28,32 @@ public class Story implements Save, Load {
     
     private Settings settings;
     
+    private final Commands commands;
+    
+    /**
+     * Creates a Story without loading it.
+     * <p>When the story will be loaded, it will use the default set of commands
+     * ({@link Commands#DEFAULT}).
+     * @param story the directory of the story
+     * @see #load() Load this story
+     * @see #Story(utils.ressources.Ressource, vnscripts.validator.Commands) Choose your commands
+     */
     public Story(Ressource story){
         this.directory = story;
+        commands = Commands.DEFAULT;
+    }
+    
+    /**
+     * Creates a story without loading it.
+     * <p>When the story will be loaded, it will use the provided set of
+     * commands.
+     * @param story the directory of the story
+     * @param commands the set of commands you want to use
+     * @see Use the default commands
+     */
+    public Story(Ressource story, Commands commands){
+        this.directory = story;
+        this.commands = commands;
     }
     
     /**
