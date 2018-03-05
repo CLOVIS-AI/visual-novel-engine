@@ -33,22 +33,10 @@ public final class Command {
      */
     public Command(String command, 
             BiConsumer<Progress, List<Parameter>> operation, 
-            ArrayList<ParameterFactory> parameters){
+            List<ParameterFactory> parameters){
         this.command = command;
         this.operation = operation;
         this.parameters = parameters;
-    }
-    
-    /**
-     * Creates a Command object.
-     * @param command the command name (eg. "choose"...).
-     * @param operation what this command should do.
-     * @param parameters the parameters of this command.
-     */
-    public Command(String command,
-            BiConsumer<Progress, List<Parameter>> operation,
-            Collection<ParameterFactory> parameters){
-        this(command, operation, new ArrayList<>(parameters));
     }
     
     /**
@@ -62,6 +50,16 @@ public final class Command {
             ParameterFactory parameter){
         this(command, operation, new ArrayList<>(1));
         parameters.add(parameter);
+    }
+    
+    /**
+     * Creates a Command object with no parameter.
+     * @param command the command name (eg. "choose"...).
+     * @param operation what this command should do.
+     */
+    public Command(String command,
+            BiConsumer<Progress, List<Parameter>> operation){
+        this(command, operation, new ArrayList<>(0));
     }
     
     /**
