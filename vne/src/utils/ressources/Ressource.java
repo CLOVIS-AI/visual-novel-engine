@@ -20,20 +20,16 @@ public interface Ressource extends Load {
     
     /**
      * Gets every children of this ressource (not recursively).
-     * @return Every children of this ressource.
+     * @return Every children of this ressource. If there are no children,
+     * returns an empty set.
      */
     public Set<Ressource> children();
     
     /**
-     * Gets the parent ressource.
-     * @return The parent ressource.
-     */
-    public Ressource parent();
-    
-    /**
      * Get a specific child.
      * @param name the name of the child
-     * @return The child that is named accordingly.
+     * @return The child that is named accordingly. If there is no child named
+     * this way, returns <code>null</code>.
      */
     public Ressource child(String name);
     
