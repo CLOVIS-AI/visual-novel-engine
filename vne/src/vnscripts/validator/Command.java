@@ -161,4 +161,19 @@ public final class Command {
         return parameters;
     }
     
+    /**
+     * This exception is thrown when the wrong command has been used.
+     */
+    class UnfitCommandException extends Exception {
+        
+        /**
+         * Creates an exception that should be thrown when a command is called
+         * but it doesn't apply to the situation (wrong name or wrong signature).
+         */
+        public UnfitCommandException(){
+            super();
+        }
+        
+    }
+    
 }
