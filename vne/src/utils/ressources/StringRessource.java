@@ -87,17 +87,17 @@ public final class StringRessource implements TextRessource {
     }
 
     @Override
-    public Set<Ressource> children() {
+    public Set<Ressource> getChildren() {
         return new HashSet<>();
     }
 
     @Override
-    public Ressource child(String name) {
+    public Ressource getChild(String name) {
         return null;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return name;
     }
     

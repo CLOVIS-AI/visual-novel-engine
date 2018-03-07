@@ -80,10 +80,10 @@ public class Story implements Save, Load {
      * story's root. Files that are not directories are ignored.
      */
     void loadChapters() throws SyntaxException{
-        Ressource chaptersFolder = directory.child("chapters");
+        Ressource chaptersFolder = directory.getChild("chapters");
         
-        for(Ressource chapter : chaptersFolder.children())
-            chapters.put(chapter.name(), new Chapter(chapter, commands));
+        for(Ressource chapter : chaptersFolder.getChildren())
+            chapters.put(chapter.getName(), new Chapter(chapter, commands));
     }
 
     /**
@@ -92,10 +92,10 @@ public class Story implements Save, Load {
      * of the story's root. Files that are not directories are ignored.
      */
     void loadActors() {
-        Ressource actorsFolder = directory.child("actors");
+        Ressource actorsFolder = directory.getChild("actors");
         
-        for(Ressource actor : actorsFolder.children())
-            actors.put(actor.name(), new Actor(actor));
+        for(Ressource actor : actorsFolder.getChildren())
+            actors.put(actor.getName(), new Actor(actor));
     }
 
     /**
@@ -106,7 +106,7 @@ public class Story implements Save, Load {
     void loadSettings() {
         TextRessource settingsFile;
         try{
-            settingsFile = (TextRessource) directory.child("settings.txt");
+            settingsFile = (TextRessource) directory.getChild("settings.txt");
         }catch(ClassCastException e){
             throw new IllegalArgumentException("The /settings.txt ressource should be a text ressource.");
         }

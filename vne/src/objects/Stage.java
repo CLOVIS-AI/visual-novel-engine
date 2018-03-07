@@ -82,7 +82,7 @@ public class Stage implements Save, Load {
     @Override
     public void load() throws IOException, SyntaxException {
         isLoaded = true;
-        System.out.print("Loading " + ressource.name() + " ... ");
+        System.out.print("Loading " + ressource.getName() + " ... ");
         
         lines = new ArrayList<>();
         

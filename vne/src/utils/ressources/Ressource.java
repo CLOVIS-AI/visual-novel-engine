@@ -19,24 +19,24 @@ import objects.Load;
 public interface Ressource extends Load {
     
     /**
-     * Gets every children of this ressource (not recursively).
-     * @return Every children of this ressource. If there are no children,
+     * Gets every getChildren of this ressource (not recursively).
+     * @return Every children of this ressource. If there are no children, 
      * returns an empty set.
      */
-    public Set<Ressource> children();
+    public Set<Ressource> getChildren();
     
     /**
-     * Get a specific child.
-     * @param name the name of the child
-     * @return The child that is named accordingly. If there is no child named
+     * Get a specific getChild.
+     * @param name the name of the getChild
+     * @return The child that is named accordingly. If there is no child named 
      * this way, returns <code>null</code>.
      */
-    public Ressource child(String name);
+    public Ressource getChild(String name);
     
     /**
      * Returns the name of this ressource (ie. for files, the name of the file).
      * @return The name of the ressource.
      */
-    public String name();
+    public String getName();
     
 }

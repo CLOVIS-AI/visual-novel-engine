@@ -38,8 +38,8 @@ public class Chapter implements Save {
     final void loadStages() throws SyntaxException{
         if(!stages.isEmpty())
             throw new IllegalStateException("This method should only called when the chapter is loaded, that is, only once.");
-        for(Ressource stage : directory.children())
-            stages.put(stage.name(), new Stage((TextRessource)stage, commands));
+        for(Ressource stage : directory.getChildren())
+            stages.put(stage.getName(), new Stage((TextRessource)stage, commands));
     }
 
     @Override
