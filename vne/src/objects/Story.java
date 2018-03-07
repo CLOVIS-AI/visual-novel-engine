@@ -9,6 +9,7 @@ import java.util.HashMap;
 import utils.ressources.Ressource;
 import utils.ressources.TextRessource;
 import vnscripts.validator.Commands;
+import vnscripts.validator.SyntaxException;
 
 /**
  * This class represents a story ; with characters, chapters, backgrounds and more.
@@ -60,14 +61,14 @@ public class Story implements Save, Load {
      * Loads this story at the last save. Any unsaved progress will be lost.
      */
     @Override
-    public void load(){
+    public void load() throws SyntaxException{
         reload();
     }
     
     /**
      * Loads the contents of the story without modifying the story's progress.
      */
-    public void reload(){
+    public void reload() throws SyntaxException{
         loadSettings();
         loadChapters();
         loadActors();
@@ -78,7 +79,7 @@ public class Story implements Save, Load {
      * <p>The chapters will be located in the 'chapters' directory inside of the
      * story's root. Files that are not directories are ignored.
      */
-    void loadChapters(){
+    void loadChapters() throws SyntaxException{
         Ressource chaptersFolder = directory.child("chapters");
         
         for(Ressource chapter : chaptersFolder.children())

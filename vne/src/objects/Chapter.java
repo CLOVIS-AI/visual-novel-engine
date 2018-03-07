@@ -9,6 +9,7 @@ import java.util.HashMap;
 import utils.ressources.Ressource;
 import utils.ressources.TextRessource;
 import vnscripts.validator.Commands;
+import vnscripts.validator.SyntaxException;
 
 /**
  *
@@ -27,14 +28,14 @@ public class Chapter implements Save {
      * Creates this chapter and searches for stages but doesn't load them.
      * @param chapter the directory where this chapter is.
      */
-    public Chapter(Ressource chapter, Commands commands) {
+    public Chapter(Ressource chapter, Commands commands) throws SyntaxException {
         directory = chapter;
         this.commands = commands;
         loadStages();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    final void loadStages(){
+    final void loadStages() throws SyntaxException{
         if(!stages.isEmpty())
             throw new IllegalStateException("This method should only called when the chapter is loaded, that is, only once.");
         for(Ressource stage : directory.children())

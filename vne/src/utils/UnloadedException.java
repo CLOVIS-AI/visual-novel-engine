@@ -9,7 +9,7 @@ package utils;
  * Use this exception when unloaded ressources are accessed.
  * @author CLOVIS
  */
-public class UnloadedException extends IllegalStateException {
+public class UnloadedException extends IllegalArgumentException {
 
     /**
      * Creates a new instance of <code>UnloadedException</code> without detail

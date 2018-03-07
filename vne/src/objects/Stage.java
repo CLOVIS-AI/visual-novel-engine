@@ -8,6 +8,9 @@ package objects;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utils.UnloadedException;
 import utils.ressources.TextRessource;
 import vnscripts.content.Line;
 import vnscripts.validator.Commands;
@@ -38,14 +41,14 @@ public class Stage implements Save, Load {
      * to load the stage.
      * @param ressource Location of the Stage save file.
      */
-    public Stage(TextRessource ressource, Commands commands){
+    public Stage(TextRessource ressource, Commands commands) throws SyntaxException{
         this.ressource = ressource;
         isLoaded = false;
         name = readHeader(ressource);
         this.commands = commands;
     }
     
-    private static String readHeader(TextRessource ressource){
+    private static String readHeader(TextRessource ressource) throws SyntaxException{
         try {
             ressource.open();
             String header = ressource.readLine();
@@ -76,14 +79,15 @@ public class Stage implements Save, Load {
         }
     }
     
-    public void next(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     @Override
-    public void load(){
+    public void load() throws IOException {
         isLoaded = true;
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        ressource.open();
+        while(ressource.hasNext()){
+            String text = ressource.readLine();
+            
+        }
     }
     
     public void unload(){

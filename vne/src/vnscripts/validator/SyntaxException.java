@@ -6,10 +6,10 @@
 package vnscripts.validator;
 
 /**
- *
- * @author ivan
+ * An exception thrown when the script is not well-written.
+ * @author CLOVIS
  */
-public class SyntaxException extends RuntimeException {
+public class SyntaxException extends Exception {
 
     /**
      * Creates a new instance of <code>SyntaxException</code> without detail
