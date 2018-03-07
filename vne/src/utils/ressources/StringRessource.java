@@ -58,7 +58,7 @@ public final class StringRessource implements TextRessource {
             throw new IllegalStateException("You cannot read with both "
                     + "readByte and readLine!");
         if(lines == null)
-            lines = content.split(" ");
+            lines = content.split(System.lineSeparator());
         return lines[position++];
     }
     
@@ -75,7 +75,7 @@ public final class StringRessource implements TextRessource {
     @Override
     public void close() {
         isLoaded = false;
-        position = -1;
+        position = 0;
         isReadingWithByte = false;
         isReadingWithLine = false;
         lines = null;
