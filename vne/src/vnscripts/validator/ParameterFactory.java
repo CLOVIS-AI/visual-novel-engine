@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.validator;
+package vnscripts.validator;
 
-import scripts.content.Parameter;
+import vnscripts.content.Parameter;
 
 /**
  * The aim of this interface is to check that a parameter given to a command is

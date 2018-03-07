@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.content.parameters;
+package vnscripts.content.parameters;
 
 import objects.Chapter;
 import objects.Story;
-import scripts.content.Parameter;
-import scripts.validator.ParameterFactory;
-import scripts.validator.SyntaxException;
+import vnscripts.content.Parameter;
+import vnscripts.validator.ParameterFactory;
+import vnscripts.validator.SyntaxException;
 
 /**
  * Represents a link to a Chapter (useful in choices for exemple).
@@ -21,7 +21,7 @@ public class ChapterLink implements Parameter {
     
     private Chapter chapter;
     
-    public ChapterLink(String parameter){
+    public ChapterLink(String parameter) throws SyntaxException{
         if(parameter == null || parameter.equals(""))
             throw new SyntaxException("The link of a chapter should not be null.");
         

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.content.parameters;
+package vnscripts.content.parameters;
 
+import vnscripts.content.parameters.Number;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

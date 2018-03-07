@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.content.parameters;
+package vnscripts.content.parameters;
 
 import java.util.Objects;
-import scripts.content.Parameter;
-import scripts.validator.ParameterFactory;
-import scripts.validator.SyntaxException;
+import vnscripts.content.Parameter;
+import vnscripts.validator.ParameterFactory;
+import vnscripts.validator.SyntaxException;
 
 /**
  * This parameter represents text. This class is immutable.
@@ -27,7 +27,7 @@ public class Text implements Parameter {
      * @param allowSpaces does this parameter allow spaces?
      * @throws SyntaxException if any syntax rule of VNScript is not verified.
      */
-    public Text(String text, boolean allowSpaces){
+    public Text(String text, boolean allowSpaces) throws SyntaxException{
         if(text == null || text.isEmpty())
             throw new SyntaxException("A text parameter cannot be null or empty : '" + text + "'");
         
@@ -42,7 +42,7 @@ public class Text implements Parameter {
      * @param text the text that was given
      * @throws SyntaxException if any syntax rule of VNScript is not verified.
      */
-    public Text(String text){
+    public Text(String text) throws SyntaxException{
         this(text, false);
     }
     

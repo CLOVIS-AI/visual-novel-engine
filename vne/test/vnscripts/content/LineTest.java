@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package scripts.content;
+package vnscripts.content;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -14,7 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import scripts.content.parameters.Text;
+import vnscripts.content.parameters.Text;
+import vnscripts.validator.SyntaxException;
 
 /**
  *
@@ -53,7 +54,7 @@ public class LineTest {
      * Test of equals method, of class Line.
      */
     @Test
-    public void testEquals() {
+    public void testEquals() throws SyntaxException {
         System.out.println("equals");
         BiConsumer<Progress, List<Parameter>> a1 = (p, l) -> System.out.println("Test1");
         BiConsumer<Progress, List<Parameter>> a2 = (p, l) -> System.out.println("Test2");
