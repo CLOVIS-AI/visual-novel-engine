@@ -7,6 +7,7 @@ package utils.ressources;
 
 import java.io.IOException;
 import utils.UnloadedException;
+import vnscripts.validator.SyntaxException;
 
 /**
  * This interface represents a text ressource (for instance a file on the
@@ -29,7 +30,7 @@ public interface TextRessource extends Ressource {
      * {@link #open() } instead of this method.
      */
     @Override
-    public default void load(){
+    public default void load() throws IOException, SyntaxException {
         open();
     }
     
@@ -37,25 +38,33 @@ public interface TextRessource extends Ressource {
      * Reads a byte from the ressource and returns it.
      * <p>This method should never return <code>null</code>, unless no new byte 
      * are available (ie. {@link #hasNext() hasNext()} returns <code>false</code>).
+     * <p><b>Warning:</b> One should not call both {@link #readByte() } and
+     * {@link #readLine() } in the same cycle, that is, if you used this method,
+     * you should close this ressource and open it again before calling the other.
      * @return The next byte.
      * @throws UnloadedException if the ressource has not been openned.
      * @throws java.io.IOException if any IO exception occurs.
+     * @throws IllegalStateException if two uncompatible methods are called.
      * @see #open() Open this ressource (before reading)
      * @see #close() Close this ressource
      */
-    public byte readByte() throws UnloadedException, IOException;
+    public byte readByte() throws UnloadedException, IOException, IllegalStateException;
     
     /**
      * Reads a line from the ressource and returns it.
      * <p>This method should never return <code>null</code>, unless no new line 
      * are available (ie. {@link #hasNext() hasNext()} returns <code>false</code>).
+     * <p><b>Warning:</b> One should not call both {@link #readByte() } and
+     * {@link #readLine() } in the same cycle, that is, if you used this method,
+     * you should close this ressource and open it again before calling the other.
      * @return The next line.
      * @throws UnloadedException if the ressource has not been openned.
      * @throws java.io.IOException if any IO exception occurs.
+     * @throws IllegalStateException if two uncompatible methods are called.
      * @see #open() Open this ressource (before reading)
      * @see #close() Close this ressource
      */
-    public String readLine() throws UnloadedException, IOException;
+    public String readLine() throws UnloadedException, IOException, IllegalStateException;
     
     /**
      * Returns the number of the last read line (last call of {@link #readLine() }).
