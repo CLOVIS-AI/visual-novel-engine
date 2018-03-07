@@ -8,6 +8,7 @@ package objects;
 import java.util.HashMap;
 import utils.ressources.Ressource;
 import utils.ressources.TextRessource;
+import vnscripts.validator.Commands;
 
 /**
  *
@@ -19,13 +20,16 @@ public class Chapter implements Save {
     
     private final HashMap<String, Stage> stages
             = new HashMap<>();
+    
+    private final Commands commands;
 
     /**
      * Creates this chapter and searches for stages but doesn't load them.
      * @param chapter the directory where this chapter is.
      */
-    public Chapter(Ressource chapter) {
+    public Chapter(Ressource chapter, Commands commands) {
         directory = chapter;
+        this.commands = commands;
         loadStages();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -34,7 +38,7 @@ public class Chapter implements Save {
         if(!stages.isEmpty())
             throw new IllegalStateException("This method should only called when the chapter is loaded, that is, only once.");
         for(Ressource stage : directory.children())
-            stages.put(stage.name(), new Stage((TextRessource)stage));
+            stages.put(stage.name(), new Stage((TextRessource)stage, commands));
     }
 
     @Override

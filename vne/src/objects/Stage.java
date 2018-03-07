@@ -7,13 +7,10 @@ package objects;
 
 import java.util.ArrayList;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import utils.ressources.TextRessource;
 import vnscripts.content.Line;
-import vnscripts.content.parameters.Text;
-import vnscripts.validator.Command;
+import vnscripts.validator.Commands;
 import vnscripts.validator.SyntaxException;
 
 /**
@@ -27,6 +24,9 @@ public class Stage implements Save, Load {
     
     private boolean isLoaded;
     
+    /** The set of commands used when loading. */
+    private final Commands commands;
+    
     private final List<Line> lines
             = new ArrayList<>();
     
@@ -38,10 +38,11 @@ public class Stage implements Save, Load {
      * to load the stage.
      * @param ressource Location of the Stage save file.
      */
-    public Stage(TextRessource ressource){
+    public Stage(TextRessource ressource, Commands commands){
         this.ressource = ressource;
         isLoaded = false;
         name = readHeader(ressource);
+        this.commands = commands;
     }
     
     private static String readHeader(TextRessource ressource){
@@ -93,18 +94,6 @@ public class Stage implements Save, Load {
     @Override
     public void save() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    // ************************************************************************* S T A T I C
-    
-    private static final Set<Command> commands;
-    
-    static {
-        System.out.print("Loading commands ... ");
-        commands = new HashSet();
-        commands.add(new Command("sout", (p, params) -> System.out.println(((Text)params.get(0)).getAsString()), Text.longFactory));
-        commands.add(new Command("warn", (p, params) -> System.err.println(((Text)params.get(0)).getAsString()), Text.longFactory));
-        System.out.println("Done.");
     }
     
 }

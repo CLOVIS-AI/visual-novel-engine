@@ -82,7 +82,7 @@ public class Story implements Save, Load {
         Ressource chaptersFolder = directory.child("chapters");
         
         for(Ressource chapter : chaptersFolder.children())
-            chapters.put(chapter.name(), new Chapter(chapter));
+            chapters.put(chapter.name(), new Chapter(chapter, commands));
     }
 
     /**
