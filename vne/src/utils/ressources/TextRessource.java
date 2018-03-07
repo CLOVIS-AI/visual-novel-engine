@@ -58,6 +58,14 @@ public interface TextRessource extends Ressource {
     public String readLine() throws UnloadedException, IOException;
     
     /**
+     * Returns the number of the last read line (last call of {@link #readLine() }).
+     * @return The number of the line
+     * @throws UnloadedException If this ressource is not currently openned.
+     * @see #open() Open/load this ressource
+     */
+    public int getLineNumber() throws UnloadedException;
+    
+    /**
      * Does this ressource contain any more bytes, that could be read with
      * {@link #readByte() }?
      * @return <code>true</code> if there are bytes remaining.
