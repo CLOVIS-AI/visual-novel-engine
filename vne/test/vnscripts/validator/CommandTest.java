@@ -22,6 +22,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import vnscripts.validator.Command.UnfitCommandException;
 
 /**
  *
@@ -70,7 +71,7 @@ public class CommandTest {
      * Test of apply method, of class Command.
      */
     @Test
-    public void testApply() {
+    public void testApply() throws SyntaxException, UnfitCommandException {
         System.out.println("apply");
         BiConsumer<Progress, List<Parameter>> action = (p, l) -> System.out.println("Command action");
         Command cmd = new Command("test", action, Text.shortFactory);
@@ -79,7 +80,7 @@ public class CommandTest {
         try{
             cmd.apply("banana foo");
             fail("The wrong command name was given, the method should've crashed.");
-        }catch(IllegalArgumentException e){
+        }catch(UnfitCommandException e){
             assertTrue(true);
         }
         
@@ -104,14 +105,14 @@ public class CommandTest {
         try{
             command01f.assertCorrespondingCommand("test 01");
             assertTrue(true);
-        }catch(IllegalArgumentException e){
+        }catch(UnfitCommandException e){
             fail("The command 'test' was corresponding.");
         }
         
         try{
             command01f.assertCorrespondingCommand("tast 01");
             fail("The command 'tast' was not corresponding.");
-        }catch(IllegalArgumentException e){
+        }catch(UnfitCommandException e){
             assertTrue(true);
         }
     }
@@ -120,7 +121,7 @@ public class CommandTest {
      * Test of assertNumberOfParameters method, of class Command.
      */
     @Test
-    public void testAssertNumberOfParameters() {
+    public void testAssertNumberOfParameters() throws SyntaxException {
         System.out.println("assertNumberOfParameters");
         
         // Tests for commands that do not accept text as a last argument
@@ -165,7 +166,7 @@ public class CommandTest {
      * Test of applyFactories method, of class Command.
      */
     @Test
-    public void testApplyFactories() {
+    public void testApplyFactories() throws SyntaxException {
         System.out.println("applyFactories");
         
         // Commands that do not accept trailing text
