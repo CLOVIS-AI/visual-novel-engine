@@ -5,6 +5,8 @@
  */
 package objects;
 
+import java.io.IOException;
+
 /**
  * States that this object can be loaded.
  * @author CLOVIS
@@ -13,7 +15,8 @@ public interface Load {
     
     /**
      * Loads this object.
+     * @throws java.io.IOException If something goes wrong during the loading.
      */
-    public void load();
+    public void load() throws IOException;
     
 }
