@@ -7,6 +7,7 @@ package objects;
 
 import java.util.ArrayList;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import utils.ressources.TextRessource;
 import vnscripts.content.Line;
@@ -36,6 +37,9 @@ public class Stage implements Save, Load {
      * information on the actual content of the file yet. Use {@link #load() }
      * to load the stage.
      * @param ressource Location of the Stage save file.
+     * @param commands The command set that will be used to load the stage.
+     * @throws vnscripts.validator.SyntaxException A syntax exception happened
+     * during the reading of the headers.
      */
     public Stage(TextRessource ressource, Commands commands) throws SyntaxException{
         this.ressource = ressource;
@@ -48,12 +52,12 @@ public class Stage implements Save, Load {
         try {
             ressource.open();
             String header = ressource.readLine();
-            String[] parts = header.split("|");
+            String[] parts = header.split("\\|");
             
             if(parts.length != 3)
                 throw new SyntaxException("The header should be a compound of "
                         + "the file declaration, the version and the name. "
-                        + "You provided " + parts.length + ": " + parts);
+                        + "You provided " + parts.length + ": " + Arrays.deepToString(parts));
             
             if(!parts[0].equalsIgnoreCase("STAGE"))
                 throw new SyntaxException("Expected a STAGE file, found "
@@ -78,12 +82,19 @@ public class Stage implements Save, Load {
     @Override
     public void load() throws IOException, SyntaxException {
         isLoaded = true;
+        System.out.print("Loading " + ressource.name() + " ... ");
         
         lines = new ArrayList<>();
         
         ressource.open();
+        ressource.readLine(); // we don't want the header
         while(ressource.hasNext()){
-            String text = ressource.readLine();
+            String text;
+            try{
+                text = ressource.readLine();
+            }catch(ArrayIndexOutOfBoundsException e){
+                break;
+            }
             
             Line line;
             try{
@@ -95,12 +106,22 @@ public class Stage implements Save, Load {
             lines.add(line);
         }
         ressource.close();
+        System.out.println("Done");
     }
     
     public void unload(){
         isLoaded = false;
         lines = null;
         System.gc();
+    }
+    
+    /**
+     * Gets the name of this stage, as provided in the file header. This method
+     * will work even if the stage is not/has not been loaded.
+     * @return the name of this stage.
+     */
+    public String getName(){
+        return name;
     }
 
     @Override
