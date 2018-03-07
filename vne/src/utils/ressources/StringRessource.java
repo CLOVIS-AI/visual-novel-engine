@@ -98,7 +98,7 @@ public final class StringRessource implements TextRessource {
 
     @Override
     public String name() {
-        return "";
+        return name;
     }
     
 }
