@@ -8,7 +8,9 @@ package vnscripts.validator;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import vnscripts.content.Line;
 import vnscripts.content.parameters.Text;
+import vnscripts.validator.Command.UnfitCommandException;
 
 /**
  * This class represents a set of commands. 
@@ -16,7 +18,7 @@ import vnscripts.content.parameters.Text;
  */
 public class Commands {
     
-    private Set<Command> commands;
+    private final Set<Command> commands;
     
     /**
      * Creates an empty set of commands.
@@ -51,6 +53,24 @@ public class Commands {
      */
     public void addAll(Collection<Command> command){
         commands.addAll(commands);
+    }
+    
+    /**
+     * Tries to match a text line to every command in the set.
+     * @param text a line of the script
+     * @return The Line object created by the Command when it is applied to the
+     * text.
+     * @throws vnscripts.validator.SyntaxException If the script has a syntax
+     * error
+     */
+    public Line validate(String text) throws SyntaxException {
+        for(Command c : commands){
+            try{
+                return c.apply(text);
+            } catch(UnfitCommandException e) {}
+        }
+        throw new SyntaxException("No commands were found that correspond "
+                + "to this line: " + text);
     }
     
     public static final Commands DEFAULT;
