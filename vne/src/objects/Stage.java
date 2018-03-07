@@ -8,9 +8,6 @@ package objects;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import utils.UnloadedException;
 import utils.ressources.TextRessource;
 import vnscripts.content.Line;
 import vnscripts.validator.Commands;
@@ -30,8 +27,7 @@ public class Stage implements Save, Load {
     /** The set of commands used when loading. */
     private final Commands commands;
     
-    private final List<Line> lines
-            = new ArrayList<>();
+    private List<Line> lines;
     
     /**
      * Creates a Stage object.
@@ -80,19 +76,31 @@ public class Stage implements Save, Load {
     }
     
     @Override
-    public void load() throws IOException {
+    public void load() throws IOException, SyntaxException {
         isLoaded = true;
+        
+        lines = new ArrayList<>();
         
         ressource.open();
         while(ressource.hasNext()){
             String text = ressource.readLine();
             
+            Line line;
+            try{
+                line = commands.validate(text);
+            }catch(SyntaxException e){
+                throw new SyntaxException(ressource, ressource.getLineNumber(), e);
+            }
+            
+            lines.add(line);
         }
+        ressource.close();
     }
     
     public void unload(){
         isLoaded = false;
-        lines.clear();
+        lines = null;
+        System.gc();
     }
 
     @Override
