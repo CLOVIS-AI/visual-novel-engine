@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils.ressources;
+package utils.resources;
 
 import java.io.IOException;
 import utils.UnloadedException;
@@ -17,7 +17,7 @@ import vnscripts.validator.SyntaxException;
  * {@link java.io.File } for example.
  * @author CLOVIS
  */
-public interface TextRessource extends Ressource {
+public interface TextResource extends Resource {
     
     /**
      * Opens this ressource, so that {@link #readByte() } and {@link #readLine() }
@@ -26,7 +26,7 @@ public interface TextRessource extends Ressource {
     public void open();
     
     /**
-     * Loads this object. Implementations of {@link Ressource} should override 
+     * Loads this object. Implementations of {@link Resource} should override 
      * {@link #open() } instead of this method.
      */
     @Override

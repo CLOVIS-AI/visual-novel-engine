@@ -6,10 +6,10 @@
 package objects;
 
 import java.util.HashMap;
-import utils.ressources.Ressource;
-import utils.ressources.TextRessource;
 import vnscripts.validator.Commands;
 import vnscripts.validator.SyntaxException;
+import utils.resources.Resource;
+import utils.resources.TextResource;
 
 /**
  * This class represents a story ; with characters, chapters, backgrounds and more.
@@ -17,7 +17,7 @@ import vnscripts.validator.SyntaxException;
  */
 public class Story implements Save, Load {
     
-    private final Ressource directory;
+    private final Resource directory;
     
     private final HashMap<String, Chapter> chapters
             = new HashMap<>();
@@ -39,7 +39,7 @@ public class Story implements Save, Load {
      * @see #load() Load this story
      * @see #Story(utils.ressources.Ressource, vnscripts.validator.Commands) Choose your commands
      */
-    public Story(Ressource story){
+    public Story(Resource story){
         this.directory = story;
         commands = Commands.DEFAULT;
     }
@@ -52,7 +52,7 @@ public class Story implements Save, Load {
      * @param commands the set of commands you want to use
      * @see Use the default commands
      */
-    public Story(Ressource story, Commands commands){
+    public Story(Resource story, Commands commands){
         this.directory = story;
         this.commands = commands;
     }
@@ -80,9 +80,9 @@ public class Story implements Save, Load {
      * story's root. Files that are not directories are ignored.
      */
     void loadChapters() throws SyntaxException{
-        Ressource chaptersFolder = directory.getChild("chapters");
+        Resource chaptersFolder = directory.getChild("chapters");
         
-        for(Ressource chapter : chaptersFolder.getChildren())
+        for(Resource chapter : chaptersFolder.getChildren())
             chapters.put(chapter.getName(), new Chapter(chapter, commands));
     }
 
@@ -92,9 +92,9 @@ public class Story implements Save, Load {
      * of the story's root. Files that are not directories are ignored.
      */
     void loadActors() {
-        Ressource actorsFolder = directory.getChild("actors");
+        Resource actorsFolder = directory.getChild("actors");
         
-        for(Ressource actor : actorsFolder.getChildren())
+        for(Resource actor : actorsFolder.getChildren())
             actors.put(actor.getName(), new Actor(actor));
     }
 
@@ -104,9 +104,9 @@ public class Story implements Save, Load {
      * inside of the story's root.
      */
     void loadSettings() {
-        TextRessource settingsFile;
+        TextResource settingsFile;
         try{
-            settingsFile = (TextRessource) directory.getChild("settings.txt");
+            settingsFile = (TextResource) directory.getChild("settings.txt");
         }catch(ClassCastException e){
             throw new IllegalArgumentException("The /settings.txt ressource should be a text ressource.");
         }

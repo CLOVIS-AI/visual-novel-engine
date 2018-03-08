@@ -5,7 +5,7 @@
  */
 package vnscripts.validator;
 
-import utils.ressources.TextRessource;
+import utils.resources.TextResource;
 
 /**
  * An exception thrown when the script is not well-written.
@@ -37,7 +37,7 @@ public class SyntaxException extends Exception {
      * @param line the line where the exception occurred
      * @param msg the detail message.
      */
-    public SyntaxException(TextRessource file, int line, String msg) {
+    public SyntaxException(TextResource file, int line, String msg) {
         super(file + ":" + line + " -> " + msg);
     }
     
@@ -49,7 +49,7 @@ public class SyntaxException extends Exception {
      * @param line the line where the exception occurred
      * @param msg the detail message.
      */
-    public SyntaxException(TextRessource file, int line, SyntaxException msg) {
+    public SyntaxException(TextResource file, int line, SyntaxException msg) {
         super(file + ":" + line + " -> " + msg.getMessage());
     }
 }

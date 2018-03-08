@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import utils.ressources.TextRessource;
 import vnscripts.content.Line;
 import vnscripts.validator.Commands;
 import vnscripts.validator.SyntaxException;
+import utils.resources.TextResource;
 
 /**
  * This class represents a stage.
@@ -20,7 +20,7 @@ import vnscripts.validator.SyntaxException;
  */
 public class Stage implements Save, Load {
     
-    private final TextRessource ressource;
+    private final TextResource ressource;
     private final String name;
     
     private boolean isLoaded;
@@ -41,14 +41,14 @@ public class Stage implements Save, Load {
      * @throws vnscripts.validator.SyntaxException A syntax exception happened
      * during the reading of the headers.
      */
-    public Stage(TextRessource ressource, Commands commands) throws SyntaxException{
+    public Stage(TextResource ressource, Commands commands) throws SyntaxException{
         this.ressource = ressource;
         isLoaded = false;
         name = readHeader(ressource);
         this.commands = commands;
     }
     
-    private static String readHeader(TextRessource ressource) throws SyntaxException{
+    private static String readHeader(TextResource ressource) throws SyntaxException{
         try {
             ressource.open();
             String header = ressource.readLine();

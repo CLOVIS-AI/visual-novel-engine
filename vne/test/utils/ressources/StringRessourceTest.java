@@ -5,6 +5,7 @@
  */
 package utils.ressources;
 
+import utils.resources.StringResource;
 import java.util.Set;
 import junit.framework.TestCase;
 
@@ -15,7 +16,7 @@ import junit.framework.TestCase;
 public class StringRessourceTest extends TestCase {
     
     private static String testerText = "THIS\nIS\nJUST\nA TEST";
-    private static StringRessource tester = new StringRessource("tester", testerText);
+    private static StringResource tester = new StringResource("tester", testerText);
     
     public StringRessourceTest(String testName) {
         super(testName);
@@ -32,7 +33,7 @@ public class StringRessourceTest extends TestCase {
     }
 
     /**
-     * Test of readByte method, of class StringRessource.
+     * Test of readByte method, of class StringResource.
      */
     public void testReadByte() throws Exception {
         System.out.println("readByte");
@@ -45,7 +46,7 @@ public class StringRessourceTest extends TestCase {
     }
 
     /**
-     * Test of readLine method, of class StringRessource.
+     * Test of readLine method, of class StringResource.
      */
     public void testReadLine() throws Exception {
         System.out.println("readLine");

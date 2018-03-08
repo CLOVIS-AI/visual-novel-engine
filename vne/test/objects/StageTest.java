@@ -6,7 +6,7 @@
 package objects;
 
 import junit.framework.TestCase;
-import utils.ressources.StringRessource;
+import utils.resources.StringResource;
 import vnscripts.content.Line;
 import vnscripts.validator.Commands;
 import vnscripts.validator.SyntaxException;
@@ -39,26 +39,26 @@ public class StageTest extends TestCase {
         String name = "The name", 
                header = "STAGE|1|" + name,
                content = header + "\nout this is a test";
-        StringRessource tester = new StringRessource("test", content);
+        StringResource tester = new StringResource("test", content);
         Stage t = new Stage(tester, Commands.DEFAULT);
         assertEquals(name, t.getName());
         
         try{
-            Stage n = new Stage(new StringRessource("test", "STAGE|1|N|D"), Commands.DEFAULT);
+            Stage n = new Stage(new StringResource("test", "STAGE|1|N|D"), Commands.DEFAULT);
             fail("There was a wrong number of | in the message.");
         }catch(SyntaxException e){
             assertTrue(true);
         }
         
         try{
-            Stage n = new Stage(new StringRessource("test", "STAGE|2|Name"), Commands.DEFAULT);
+            Stage n = new Stage(new StringResource("test", "STAGE|2|Name"), Commands.DEFAULT);
             fail("Wrong version number");
         }catch(SyntaxException e){
             assertTrue(true);
         }
         
         try{
-            Stage n = new Stage(new StringRessource("test", "STAGE|1|"), Commands.DEFAULT);
+            Stage n = new Stage(new StringResource("test", "STAGE|1|"), Commands.DEFAULT);
             fail("No name provided.");
         }catch(SyntaxException e){
             assertTrue(true);

@@ -6,7 +6,7 @@
 package objects;
 
 import java.io.File;
-import utils.ressources.TextRessource;
+import utils.resources.TextResource;
 
 /**
  * The settings of a particular story.
@@ -14,13 +14,13 @@ import utils.ressources.TextRessource;
  */
 class Settings implements Save {
     
-    private final TextRessource file;
+    private final TextResource file;
 
     /**
      * Loads the settings from a file.
      * @param file the file.
      */
-    Settings(TextRessource file) {
+    Settings(TextResource file) {
         this.file = file;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

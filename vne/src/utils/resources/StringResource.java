@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils.ressources;
+package utils.resources;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -14,7 +14,7 @@ import utils.UnloadedException;
  * A ressource that is based on a String.
  * @author CLOVIS
  */
-public final class StringRessource implements TextRessource {
+public final class StringResource implements TextResource {
 
     private final String name;
     
@@ -31,7 +31,7 @@ public final class StringRessource implements TextRessource {
      * @param name the name of this ressource
      * @param content the content of the ressource
      */
-    public StringRessource(String name, String content){
+    public StringResource(String name, String content){
         this.content = content;
         close();
         this.name = name;
@@ -87,12 +87,12 @@ public final class StringRessource implements TextRessource {
     }
 
     @Override
-    public Set<Ressource> getChildren() {
+    public Set<Resource> getChildren() {
         return new HashSet<>();
     }
 
     @Override
-    public Ressource getChild(String name) {
+    public Resource getChild(String name) {
         return null;
     }
 
