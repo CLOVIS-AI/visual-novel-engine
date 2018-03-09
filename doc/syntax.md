@@ -16,6 +16,7 @@
 				screens/
 			chapters/
 				chapter1/
+					settings.txt
 					stage1.txt
 					stage2.txt
 				chapter2/
