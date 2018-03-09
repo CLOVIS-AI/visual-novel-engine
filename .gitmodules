@@ -1,0 +1,3 @@
+[submodule "wiki"]
+	path = wiki
+	url = git@github.com:CLOVIS-AI/visual-novel-engine.wiki.git
