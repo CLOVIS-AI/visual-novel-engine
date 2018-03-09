@@ -69,8 +69,8 @@
 		choice lbl:THERE Something else
 
 		equals first 2
-		success-stg STAGE_NAME
-		failure-end STAGE_NAME
+		success stg:STAGE_NAME
+		failure end:STAGE_NAME
 
 	NOTE: Overloading of commands is authorized BUT the number of parameters MUST be the same
 
