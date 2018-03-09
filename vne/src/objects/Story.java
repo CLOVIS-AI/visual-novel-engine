@@ -24,6 +24,9 @@ public class Story implements Save, Load {
     private final HashMap<String, Actor> actors
             = new HashMap<>();
     
+    private final HashMap<String, Ressource> sounds
+            = new HashMap<>();
+    
     private Progress state = null;
     
     private Settings settings;
@@ -83,6 +86,18 @@ public class Story implements Save, Load {
         
         for(Ressource chapter : chaptersFolder.children())
             chapters.put(chapter.name(), new Chapter(chapter));
+    }
+    
+    /**
+     * Loads all musics.
+     * <p>The sounds are expected to be located in the 'sounds/musics' directory
+     * inside if the story's root.
+     */
+    void loadSounds(){
+        Ressource soundsFolder = directory.child("sounds").child("musics");
+        
+        for(Ressource music : soundsFolder.children())
+            sounds.put(music.name(), music);
     }
 
     /**
