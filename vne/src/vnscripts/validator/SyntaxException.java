@@ -5,11 +5,13 @@
  */
 package vnscripts.validator;
 
+import utils.resources.TextResource;
+
 /**
- *
- * @author ivan
+ * An exception thrown when the script is not well-written.
+ * @author CLOVIS
  */
-public class SyntaxException extends RuntimeException {
+public class SyntaxException extends Exception {
 
     /**
      * Creates a new instance of <code>SyntaxException</code> without detail
@@ -32,9 +34,22 @@ public class SyntaxException extends RuntimeException {
      * detail message.
      *
      * @param file the file where the syntax error occured.
+     * @param line the line where the exception occurred
      * @param msg the detail message.
      */
-    public SyntaxException(String file, String msg) {
-        super(file + " -> " + msg);
+    public SyntaxException(TextResource file, int line, String msg) {
+        super(file + ":" + line + " -> " + msg);
+    }
+    
+    /**
+     * Constructs an instance of <code>SyntaxException</code> with the specified
+     * detail message.
+     *
+     * @param file the file where the syntax error occured.
+     * @param line the line where the exception occurred
+     * @param msg the detail message.
+     */
+    public SyntaxException(TextResource file, int line, SyntaxException msg) {
+        super(file + ":" + line + " -> " + msg.getMessage());
     }
 }

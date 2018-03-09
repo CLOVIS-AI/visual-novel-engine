@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils.ressources;
+package utils.resources;
 
 import java.util.Set;
 import objects.Load;
@@ -16,31 +16,27 @@ import objects.Load;
  * {@link java.io.File } for example.
  * @author CLOVIS
  */
-public interface Ressource extends Load {
+public interface Resource extends Load {
     
     /**
-     * Gets every children of this ressource (not recursively).
-     * @return Every children of this ressource.
+     * Gets every getChildren of this ressource (not recursively).
+     * @return Every children of this ressource. If there are no children, 
+     * returns an empty set.
      */
-    public Set<Ressource> children();
+    public Set<Resource> getChildren();
     
     /**
-     * Gets the parent ressource.
-     * @return The parent ressource.
+     * Get a specific getChild.
+     * @param name the name of the getChild
+     * @return The child that is named accordingly. If there is no child named 
+     * this way, returns <code>null</code>.
      */
-    public Ressource parent();
-    
-    /**
-     * Get a specific child.
-     * @param name the name of the child
-     * @return The child that is named accordingly.
-     */
-    public Ressource child(String name);
+    public Resource getChild(String name);
     
     /**
      * Returns the name of this ressource (ie. for files, the name of the file).
      * @return The name of the ressource.
      */
-    public String name();
+    public String getName();
     
 }

@@ -5,7 +5,7 @@
  */
 package objects;
 
-import utils.ressources.Ressource;
+import utils.resources.Resource;
 
 /**
  *
@@ -19,7 +19,7 @@ class Actor implements Save {
      * Loads an actor from a data file.
      * @param file where to load the actor from.
      */
-    Actor(Ressource ressource) {
+    Actor(Resource ressource) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

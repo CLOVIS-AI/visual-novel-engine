@@ -6,9 +6,10 @@
 package objects;
 
 import java.util.HashMap;
-import utils.ressources.Ressource;
-import utils.ressources.TextRessource;
 import vnscripts.validator.Commands;
+import vnscripts.validator.SyntaxException;
+import utils.resources.Resource;
+import utils.resources.TextResource;
 
 /**
  * This class represents a story ; with characters, chapters, backgrounds and more.
@@ -16,7 +17,7 @@ import vnscripts.validator.Commands;
  */
 public class Story implements Save, Load {
     
-    private final Ressource directory;
+    private final Resource directory;
     
     private final HashMap<String, Chapter> chapters
             = new HashMap<>();
@@ -24,7 +25,7 @@ public class Story implements Save, Load {
     private final HashMap<String, Actor> actors
             = new HashMap<>();
     
-    private final HashMap<String, Ressource> sounds
+    private final HashMap<String, Resource> sounds
             = new HashMap<>();
     
     private Progress state = null;
@@ -41,7 +42,7 @@ public class Story implements Save, Load {
      * @see #load() Load this story
      * @see #Story(utils.ressources.Ressource, vnscripts.validator.Commands) Choose your commands
      */
-    public Story(Ressource story){
+    public Story(Resource story){
         this.directory = story;
         commands = Commands.DEFAULT;
     }
@@ -54,7 +55,7 @@ public class Story implements Save, Load {
      * @param commands the set of commands you want to use
      * @see Use the default commands
      */
-    public Story(Ressource story, Commands commands){
+    public Story(Resource story, Commands commands){
         this.directory = story;
         this.commands = commands;
     }
@@ -63,14 +64,14 @@ public class Story implements Save, Load {
      * Loads this story at the last save. Any unsaved progress will be lost.
      */
     @Override
-    public void load(){
+    public void load() throws SyntaxException{
         reload();
     }
     
     /**
      * Loads the contents of the story without modifying the story's progress.
      */
-    public void reload(){
+    public void reload() throws SyntaxException{
         loadSettings();
         loadChapters();
         loadActors();
@@ -81,11 +82,11 @@ public class Story implements Save, Load {
      * <p>The chapters will be located in the 'chapters' directory inside of the
      * story's root. Files that are not directories are ignored.
      */
-    void loadChapters(){
-        Ressource chaptersFolder = directory.child("chapters");
+    void loadChapters() throws SyntaxException{
+        Resource chaptersFolder = directory.getChild("chapters");
         
-        for(Ressource chapter : chaptersFolder.children())
-            chapters.put(chapter.name(), new Chapter(chapter));
+        for(Resource chapter : chaptersFolder.getChildren())
+            chapters.put(chapter.getName(), new Chapter(chapter, commands));
     }
     
     /**
@@ -94,10 +95,12 @@ public class Story implements Save, Load {
      * inside if the story's root.
      */
     void loadSounds(){
-        Ressource soundsFolder = directory.child("sounds").child("musics");
+        Resource soundsFolder = directory
+                .getChild("sounds")
+                .getChild("musics");
         
-        for(Ressource music : soundsFolder.children())
-            sounds.put(music.name(), music);
+        for(Resource music : soundsFolder.getChildren())
+            sounds.put(music.getName(), music);
     }
 
     /**
@@ -106,10 +109,10 @@ public class Story implements Save, Load {
      * of the story's root. Files that are not directories are ignored.
      */
     void loadActors() {
-        Ressource actorsFolder = directory.child("actors");
+        Resource actorsFolder = directory.getChild("actors");
         
-        for(Ressource actor : actorsFolder.children())
-            actors.put(actor.name(), new Actor(actor));
+        for(Resource actor : actorsFolder.getChildren())
+            actors.put(actor.getName(), new Actor(actor));
     }
 
     /**
@@ -118,9 +121,9 @@ public class Story implements Save, Load {
      * inside of the story's root.
      */
     void loadSettings() {
-        TextRessource settingsFile;
+        TextResource settingsFile;
         try{
-            settingsFile = (TextRessource) directory.child("settings.txt");
+            settingsFile = (TextResource) directory.getChild("settings.txt");
         }catch(ClassCastException e){
             throw new IllegalArgumentException("The /settings.txt ressource should be a text ressource.");
         }

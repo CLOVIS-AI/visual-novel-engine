@@ -67,9 +67,10 @@ public final class Command {
      * @param line the text found.
      * @return A Line of the corresponding text and the corresponding parameters.
      * @throws SyntaxException if this text has a syntax error.
-     * @throws IllegalArgumentException if the line does not correspond to this command.
+     * @throws vnscripts.validator.Command.UnfitCommandException if this command 
+     * does not correspond to the line (wrong name or wrong signature).
      */
-    public Line apply(String line) throws SyntaxException {
+    public Line apply(String line) throws SyntaxException, UnfitCommandException {
         
         assertCorrespondingCommand(line);
         
@@ -86,15 +87,15 @@ public final class Command {
      * Asserts that the provided String corresponds to this command.
      * @param line the string
      */
-    void assertCorrespondingCommand(String line){
+    void assertCorrespondingCommand(String line) throws UnfitCommandException{
         int firstSpace = line.indexOf(' ');
         
         if(firstSpace == -1){
             if(!line.equals(command))
-                throw new IllegalArgumentException("This command is called '" + command + "' but you provided the line : " + line);
+                throw new UnfitCommandException();
         }else{
             if(!line.substring(0, firstSpace).equals(command))
-                throw new IllegalArgumentException("This command is called '" + command + "' but you provided the line : " + line);
+                throw new UnfitCommandException();
         }
     }
     
@@ -104,7 +105,7 @@ public final class Command {
      * @return each word in the line
      * @throws SyntaxException the number of parameters was not the expected one.
      */
-    String[] assertNumberOfParameters(String line){
+    String[] assertNumberOfParameters(String line) throws SyntaxException{
         
         int parameterNumber = parameters.size(),
             wordNumber = parameterNumber + 1; // params + command name
@@ -148,7 +149,7 @@ public final class Command {
      * @return A lit of all the parameters.
      * @throws SyntaxException if any factory fails.
      */
-    List<Parameter> applyFactories(String[] params){
+    List<Parameter> applyFactories(String[] params) throws SyntaxException{
         List<Parameter> parameters = new ArrayList<>(params.length);
         
         for(int i = 0; i < params.length; i++){
@@ -158,6 +159,21 @@ public final class Command {
         }
         
         return parameters;
+    }
+    
+    /**
+     * This exception is thrown when the wrong command has been used.
+     */
+    class UnfitCommandException extends Exception {
+        
+        /**
+         * Creates an exception that should be thrown when a command is called
+         * but it doesn't apply to the situation (wrong name or wrong signature).
+         */
+        public UnfitCommandException(){
+            super();
+        }
+        
     }
     
 }

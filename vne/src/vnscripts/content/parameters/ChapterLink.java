@@ -21,7 +21,7 @@ public class ChapterLink implements Parameter {
     
     private Chapter chapter;
     
-    public ChapterLink(String parameter){
+    public ChapterLink(String parameter) throws SyntaxException{
         if(parameter == null || parameter.equals(""))
             throw new SyntaxException("The link of a chapter should not be null.");
         
