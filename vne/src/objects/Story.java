@@ -53,7 +53,7 @@ public class Story implements Save, Load {
      * commands.
      * @param story the directory of the story
      * @param commands the set of commands you want to use
-     * @see Use the default commands
+     * @see #Story(utils.resources.Resource) Use the default commands
      */
     public Story(Resource story, Commands commands){
         this.directory = story;
