@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils.ressources;
+package utils.resources;
 
-import utils.resources.StringResource;
-import java.util.Set;
 import junit.framework.TestCase;
 
 /**

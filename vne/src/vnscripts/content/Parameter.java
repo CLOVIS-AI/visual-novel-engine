@@ -22,7 +22,7 @@ public interface Parameter {
     public String getAsString();
     
     /**
-     * Links this parameter with any ressource it may need.
+     * Links this parameter with any resource it may need.
      * <p>Exemples of use :
      * <ul>
      *      <li>The image path in the "background" command</il>

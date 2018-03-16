@@ -6,7 +6,7 @@
 package utils;
 
 /**
- * Use this exception when unloaded ressources are accessed.
+ * Use this exception when unloaded resources are accessed.
  * @author CLOVIS
  */
 public class UnloadedException extends IllegalArgumentException {

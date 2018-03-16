@@ -20,7 +20,7 @@ import utils.resources.TextResource;
  */
 public class Stage implements Save, Load {
     
-    private final TextResource ressource;
+    private final TextResource resource;
     private final String name;
     
     private boolean isLoaded;
@@ -36,22 +36,22 @@ public class Stage implements Save, Load {
      * other data is not read, therefore the object does not contain any 
      * information on the actual content of the file yet. Use {@link #load() }
      * to load the stage.
-     * @param ressource Location of the Stage save file.
+     * @param resource Location of the Stage save file.
      * @param commands The command set that will be used to load the stage.
      * @throws vnscripts.validator.SyntaxException A syntax exception happened
      * during the reading of the headers.
      */
-    public Stage(TextResource ressource, Commands commands) throws SyntaxException{
-        this.ressource = ressource;
+    public Stage(TextResource resource, Commands commands) throws SyntaxException{
+        this.resource = resource;
         isLoaded = false;
-        name = readHeader(ressource);
+        name = readHeader(resource);
         this.commands = commands;
     }
     
-    private static String readHeader(TextResource ressource) throws SyntaxException{
+    private static String readHeader(TextResource resource) throws SyntaxException{
         try {
-            ressource.open();
-            String header = ressource.readLine();
+            resource.open();
+            String header = resource.readLine();
             String[] parts = header.split("\\|");
             
             if(parts.length != 3)
@@ -73,25 +73,25 @@ public class Stage implements Save, Load {
             
             return parts[2];
         } catch (IOException ex) {
-            throw new IllegalArgumentException("The ressource " + ressource.toString() + " cannot be opened: (" + ex.toString() + ")");
+            throw new IllegalArgumentException("The ressource " + resource.toString() + " cannot be opened: (" + ex.toString() + ")");
         }finally{
-            ressource.close();
+            resource.close();
         }
     }
     
     @Override
     public void load() throws IOException, SyntaxException {
         isLoaded = true;
-        System.out.print("Loading " + ressource.getName() + " ... ");
+        System.out.print("Loading " + resource.getName() + " ... ");
         
         lines = new ArrayList<>();
         
-        ressource.open();
-        ressource.readLine(); // we don't want the header
-        while(ressource.hasNext()){
+        resource.open();
+        resource.readLine(); // we don't want the header
+        while(resource.hasNext()){
             String text;
             try{
-                text = ressource.readLine();
+                text = resource.readLine();
             }catch(ArrayIndexOutOfBoundsException e){
                 break;
             }
@@ -100,12 +100,12 @@ public class Stage implements Save, Load {
             try{
                 line = commands.validate(text);
             }catch(SyntaxException e){
-                throw new SyntaxException(ressource, ressource.getLineNumber(), e);
+                throw new SyntaxException(resource, resource.getLineNumber(), e);
             }
             
             lines.add(line);
         }
-        ressource.close();
+        resource.close();
         System.out.println("Done");
     }
     

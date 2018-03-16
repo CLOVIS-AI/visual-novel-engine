@@ -11,7 +11,7 @@ import java.util.Set;
 import utils.UnloadedException;
 
 /**
- * A ressource that is based on a String.
+ * A resource that is based on a String.
  * @author CLOVIS
  */
 public final class StringResource implements TextResource {
@@ -27,9 +27,9 @@ public final class StringResource implements TextResource {
                     isReadingWithLine;
     
     /**
-     * Creates a ressource based on a String (mostly used for Unit Testing).
-     * @param name the name of this ressource
-     * @param content the content of the ressource
+     * Creates a resource based on a String (mostly used for Unit Testing).
+     * @param name the name of this resource
+     * @param content the content of the resource
      */
     public StringResource(String name, String content){
         this.content = content;

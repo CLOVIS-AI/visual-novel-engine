@@ -19,7 +19,7 @@ class Actor implements Save {
      * Loads an actor from a data file.
      * @param file where to load the actor from.
      */
-    Actor(Resource ressource) {
+    Actor(Resource resource) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -40,7 +40,7 @@ public class Story implements Save, Load {
      * ({@link Commands#DEFAULT}).
      * @param story the directory of the story
      * @see #load() Load this story
-     * @see #Story(utils.ressources.Ressource, vnscripts.validator.Commands) Choose your commands
+     * @see #Story(utils.resources.Resource, vnscripts.validator.Commands) Choose your commands
      */
     public Story(Resource story){
         this.directory = story;
@@ -125,7 +125,7 @@ public class Story implements Save, Load {
         try{
             settingsFile = (TextResource) directory.getChild("settings.txt");
         }catch(ClassCastException e){
-            throw new IllegalArgumentException("The /settings.txt ressource should be a text ressource.");
+            throw new IllegalArgumentException("The /settings.txt resource should be a text resource.");
         }
         
         settings = new Settings(settingsFile);
